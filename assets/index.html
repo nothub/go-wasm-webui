@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>go-wasm</title>
+    <link href="data:image/png;base64," rel="icon"> <!-- empty favicon -->
+    <meta charset="UTF-8">
+    <meta content="a golang wasm" name="description">
+    <meta content="#E6E2BD" name="theme-color">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <script src="wasm_exec.js"></script>
+    <script>
+        if (!WebAssembly.instantiateStreaming) {
+            WebAssembly.instantiateStreaming = async (response, importObject) => await WebAssembly.instantiate(await (await response).arrayBuffer(), importObject);
+        }
+        const go = new Go();
+        WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => go.run(result.instance)).catch((error) => console.error(error));
+    </script>
+</head>
+<body style="color: #9EAC30; background-color: #151515; text-align: center"></body>
+</html>
