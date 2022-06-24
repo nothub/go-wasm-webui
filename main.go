@@ -3,5 +3,5 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Hello👋 World🌍!")
+	fmt.Printf("Hello%c World%c!\n", '👋', '🌍')
 }
