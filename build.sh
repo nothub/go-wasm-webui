@@ -12,7 +12,6 @@ panic() {
 }
 
 print_usage() {
-  set +x
   script_name="$(basename "${BASH_SOURCE[0]}")"
   log "Usage: ${script_name} [-c] [-s] [-h]
 
@@ -83,6 +82,6 @@ if [[ ${task_serve} -gt 0 ]]; then
   log "Serving at: http://127.0.0.1:8080/"
   docker run --rm --tty \
     --publish 127.0.0.1:8080:80 \
-    --volume "${PWD}"/${output_dir}:/usr/share/caddy \
+    --volume "${PWD}"/${output_dir}:/usr/share/caddy:ro \
     caddy:2-alpine
 fi
